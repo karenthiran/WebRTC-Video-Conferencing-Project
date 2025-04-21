@@ -13,10 +13,19 @@ app.prepare().then(() => {
   const httpServer = createServer(handler);
 
   const io = new Server(httpServer);
+  let onlineUsers=[]
 
   io.on("connection", (socket) => {
-    console.log('Client connected...')
-    // ...
+    // add user
+    socket.on('addNewUser',(clerkUser)=>{
+      clerkUser && !onlineUsers.some(user=>user?.userId === clerkUser.id) && on.onlineUsers.push({
+        userId: clerkUser.id,
+        socketId: socket.id,
+        profile: clerkUser
+      })
+
+      io.emit('getUsers',onlineUsers)
+    })
   });
 
   httpServer
