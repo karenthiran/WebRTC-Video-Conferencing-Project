@@ -1,4 +1,6 @@
-import { createContext, useContext } from "react";
+import { useUser } from "@clerk/nextjs";
+import { createContext, useContext, useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 
 interface iSocketContext{
 
@@ -7,6 +9,48 @@ interface iSocketContext{
 export const SocketContext = createContext<iSocketContext | null>(null)
 
 export const SocketContextProvider= ({children}:{children:React.ReactNode}) =>{
+
+    const user=useUser()
+    const [socket, setSocket] = useState<Socket | null>(null)
+    const [isSocketConnected, setIsSocketConnected] = useState(false)
+
+    console.log('isConnected>>', isSocketConnected)
+
+    //initillizing a socket
+    useEffect( ()=>{
+        const newSocket = io()
+        setSocket(newSocket)
+
+        return ()=>{
+            newSocket.disconnect()
+        }
+    },[user])
+
+    useEffect( ()=>{
+        if(socket===null) return;
+
+        if(socket.connected){
+            onConnect()
+        }
+
+        function onConnect(){
+            setIsSocketConnected(true)
+        }
+
+        function onDisconnet(){
+            setIsSocketConnected(false)
+        }
+
+        socket.on('connect',onConnect)
+        socket.on('disconnect',onDisconnet)
+
+        return ()=>{
+            socket.off('connect', onConnect)
+            socket.off('disconnect', onDisconnet)
+        }
+
+    }, [socket])
+
     return <SocketContext.Provider value={{}}>
         {children}
     </SocketContext.Provider>
