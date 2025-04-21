@@ -10,11 +10,9 @@ export const SocketContext = createContext<iSocketContext | null>(null)
 
 export const SocketContextProvider= ({children}:{children:React.ReactNode}) =>{
 
-    const user=useUser()
+    const {user}=useUser()
     const [socket, setSocket] = useState<Socket | null>(null)
     const [isSocketConnected, setIsSocketConnected] = useState(false)
-
-    console.log('isConnected>>', isSocketConnected)
 
     //initillizing a socket
     useEffect( ()=>{
