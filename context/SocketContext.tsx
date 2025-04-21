@@ -6,9 +6,9 @@ interface iSocketContext{
 
 export const SocketContext = createContext<iSocketContext | null>(null)
 
-export const SocketContextProvider= () =>{
+export const SocketContextProvider= ({children}:{children:React.ReactNode}) =>{
     return <SocketContext.Provider value={{}}>
-
+        {children}
     </SocketContext.Provider>
 }
 
