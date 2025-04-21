@@ -26,6 +26,13 @@ app.prepare().then(() => {
 
       io.emit('getUsers',onlineUsers)
     })
+
+    socket.on('disconnect',()=>{
+      onlineUsers = onlineUsers.filter(user => user.socketId != socket.id)
+
+      //send online users
+      io.emit('getUsers',onlineUsers)
+    })
   });
 
   httpServer
