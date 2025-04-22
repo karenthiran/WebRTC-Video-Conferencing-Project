@@ -1,3 +1,4 @@
+import { SocketUser } from "@/types";
 import { useUser } from "@clerk/nextjs";
 import { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
@@ -13,6 +14,7 @@ export const SocketContextProvider= ({children}:{children:React.ReactNode}) =>{
     const {user}=useUser()
     const [socket, setSocket] = useState<Socket | null>(null)
     const [isSocketConnected, setIsSocketConnected] = useState(false)
+    const [onlineUsers, setOnlineUsers] = useState<SocketUser[] | null>(null)
 
     //initillizing a socket
     useEffect( ()=>{
@@ -48,6 +50,24 @@ export const SocketContextProvider= ({children}:{children:React.ReactNode}) =>{
         }
 
     }, [socket])
+
+    //set online users
+    useEffect(()=>{
+
+        if(!socket || !isSocketConnected) return;
+
+        socket.emit("addNewUser",user)
+        socket.on('getusers',(res)=>{
+            setOnlineUsers(res)
+        })
+
+        return ()=>{
+            socket.off('getusers',(res)=>{
+            setOnlineUsers(res)
+        })
+        }
+
+    },[socket, isSocketConnected, user])
 
     return <SocketContext.Provider value={{}}>
         {children}
