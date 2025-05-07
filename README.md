@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WebRTC Video Conference
+
+This is a simple WebRTC-based video conferencing web application built with Node.js. It enables peer-to-peer video communication directly between browsers without requiring plugins.
+
+## Features
+
+- Peer-to-peer video conferencing using WebRTC
+- Room-based video call setup
+- Simple frontend UI
+- Express server setup for signaling
+
+## Project Structure
+
+```
+.
+├── public/
+│   ├── index.html          # Main frontend HTML
+│   ├── css/
+│   │   └── main.css        # Styles for the UI
+│   └── js/
+│       ├── main.js         # Room handling logic
+│       └── webrtc.js       # WebRTC connection logic
+├── server.js               # Express server (signaling server)
+├── package.json            # Node.js dependencies
+├── .env                    # Environment config (optional)
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Node.js](https://nodejs.org/) (v14 or newer recommended)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/webrtc-video-conference.git
+   cd webrtc-video-conference
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. (Optional) Set up a `.env` file if needed for environment configuration.
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the server:
+   ```bash
+   node server.js
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+To deploy on platforms like Heroku, Glitch, or Vercel, ensure ports and environment configurations are set accordingly.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
+
+## Acknowledgments
+
+- [WebRTC.org](https://webrtc.org/)
+- [MDN WebRTC Guide](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)
