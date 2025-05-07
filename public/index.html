@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Video Conference</title>
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+    <div id="app-container">
+        <header>
+            <h1>WebRTC Video Conference</h1>
+        </header>
+
+        <section class="room-section">
+            <div class="input-group">
+                <label for="roomId">Room ID</label>
+                <input id="roomId" type="text" placeholder="Enter room ID" />
+            </div>
+
+            <div class="room-actions">
+                <button id="joinBtn" class="btn primary-btn">Join</button>
+                <button id="leaveBtn" class="btn secondary-btn">Leave</button>
+            </div>
+            <p id="notification"></p>
+        </section>
+
+        <section id="video-section">
+            <div id="videoGrid" class="grid-container"></div>
+            <div id="localVideo-container">
+                <video autoplay playsinline muted></video>
+            </div>
+        </section>
+
+        <section class="controls">
+            <button id="muteBtn" class="btn control-btn">Mute</button>
+            <button id="cameraBtn" class="btn control-btn">Turn Off Camera</button>
+        </section>
+
+        <section id="chat">
+            <div id="chatMessages"></div>
+            <div class="chat-input-group">
+                <input id="chatInput" type="text" placeholder="Type a message..." />
+                <button id="sendBtn" class="btn primary-btn">Send</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/webrtc.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
